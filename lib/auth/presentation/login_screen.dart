@@ -1,3 +1,4 @@
+import 'package:edspert_course/common/appicon.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -17,7 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: ListView(
+          child: Column(
             children: [
               const Gap(16),
               Image.asset(
@@ -31,13 +32,30 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const Gap(8),
               Text(
-                "Selamat Datang di aplikasi Widya Edu /nAplikasi Latihan dan Konsultasi Soal",
+                "Selamat Datang di aplikasi Widya Edu \nAplikasi Latihan dan Konsultasi Soal",
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const Spacer(),
-              Container(
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(100), border: Border.all(color: )),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      border: Border.all(color: Colors.green)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(AppIcon.iconGoogle.assetPath),
+                      const Gap(16),
+                      Text(
+                        "Login dengan Google?",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
+                ),
               )
             ],
           ),

@@ -10,3 +10,5 @@ const colorLine = Color(0xFFE4E4E5);
 const colorInputBackground = Color(0xFFF6F6F6);
 const colorBackground = Color(0xFFF9F9F9);
 const colorOffWhite = Color(0xFFFCFCFC);
+
+Size sizeMedia(BuildContext context) => MediaQuery.sizeOf(context);

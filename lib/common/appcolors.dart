@@ -26,7 +26,9 @@ class AppColors {
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
       seedColor: primary,
-      background: primary,
+      primary: primary,
+      background: background,
+      secondary: secondary,
       onBackground: offWhite,
     ),
   );
