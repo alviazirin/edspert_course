@@ -1,4 +1,6 @@
+import 'package:edspert_course/auth/presentation/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -36,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen>
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Center(
           child: TweenAnimationBuilder<double>(
-            duration: const Duration(seconds: 1),
+            duration: const Duration(seconds: 2),
             tween: animationSize,
             builder: (context, value, child) {
               return Center(
@@ -48,6 +50,14 @@ class _SplashScreenState extends State<SplashScreen>
                   ),
                 ),
               );
+            },
+            onEnd: () {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  PageTransition(
+                      child: LoginScreen(),
+                      type: PageTransitionType.leftToRight),
+                  (route) => false);
             },
           ),
         ),

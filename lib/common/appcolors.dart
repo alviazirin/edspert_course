@@ -11,6 +11,8 @@ class AppColors {
   static const Color inputBackground = Color(0xFFF6F6F6);
   static const Color background = Color(0xFFF9F9F9);
   static const Color offWhite = Color(0xFFFCFCFC);
+  static const Color greenSuccess = Color(0xFF00BA4A);
+  static const Color yellowWarning = Color(0xFFFFCC47);
 
   static final ThemeData appThemeData = ThemeData(
     primaryColor: primary,
@@ -25,6 +27,7 @@ class AppColors {
     colorScheme: ColorScheme.fromSeed(
       seedColor: primary,
       background: primary,
+      onBackground: offWhite,
     ),
   );
 }
