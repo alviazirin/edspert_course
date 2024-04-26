@@ -1,5 +1,4 @@
 import 'package:edspert_course/auth/presentation/login_screen.dart';
-import 'package:edspert_course/auth/presentation/login_screen_flflow.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -57,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen>
               Navigator.pushAndRemoveUntil(
                   context,
                   PageTransition(
-                      child: LoginScreenWidget(),
+                      child: LoginScreen(),
                       type: PageTransitionType.leftToRight),
                   (route) => false);
             },
