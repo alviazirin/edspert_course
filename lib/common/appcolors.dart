@@ -23,6 +23,8 @@ class AppColors {
     ),
     textTheme: const TextTheme(
       titleLarge: TextStyle(color: title),
+      bodyMedium: TextStyle(color: body),
+      labelMedium: TextStyle(color: label),
     ),
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
