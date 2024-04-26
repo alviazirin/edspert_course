@@ -13,6 +13,7 @@ class AppColors {
   static const Color offWhite = Color(0xFFFCFCFC);
   static const Color greenSuccess = Color(0xFF00BA4A);
   static const Color yellowWarning = Color(0xFFFFCC47);
+  static const Color blackButton = Color(0xFF1A1F26);
 
   static final ThemeData appThemeData = ThemeData(
     primaryColor: primary,

@@ -1,3 +1,4 @@
+import 'package:edspert_course/common/appcolors.dart';
 import 'package:edspert_course/common/appicon.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -60,5 +61,29 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
         ));
+  }
+}
+
+enum LoginButtonVariant {
+  google,
+  apple;
+
+  String get title {
+    switch (this) {
+      case apple:
+        return "Login dengan Google";
+
+      default:
+        return "Login dengan Apple";
+    }
+  }
+
+  Color get bgColor {
+    switch (this) {
+      case apple:
+        return AppColors.blackButton;
+      default:
+        return Colors.white;
+    }
   }
 }
