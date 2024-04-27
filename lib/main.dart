@@ -1,4 +1,4 @@
-import 'package:edspert_course/common/appcolors.dart';
+import 'package:edspert_course/core/appcolors.dart';
 import 'package:edspert_course/common/presentation/splash.dart';
 import 'package:flutter/material.dart';
 
