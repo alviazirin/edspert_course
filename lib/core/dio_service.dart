@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:edspert_course/core/api_constant.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/foundation.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioService {
   late Dio _dio;
@@ -14,11 +15,6 @@ class DioService {
     initializeDio();
   }
 
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('token');
-  }
-
   Future<void> initializeDio() async {
     _dio = Dio(
       BaseOptions(
@@ -29,20 +25,10 @@ class DioService {
       ),
     );
 
-    _dio.interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (options, handler) {
-          // Do something before request is sent
-          return handler.next(options); // continue
-        },
-
-        onError: (DioException e, handler) {
-          // Do something on error
-          return handler.next(e); // continue
-        },
-        // ...
-      ),
-    );
+    if (kDebugMode) {
+      _dio.interceptors.add(PrettyDioLogger(
+          requestHeader: true, requestBody: true, responseBody: true));
+    }
   }
 
   Future<Response> get(String url, {Map<String, dynamic>? params}) async {
