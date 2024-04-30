@@ -1,7 +1,9 @@
 import 'package:edspert_course/core/appcolors.dart';
 import 'package:edspert_course/core/appicon.dart';
+import 'package:edspert_course/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:page_transition/page_transition.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -37,30 +39,60 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const Spacer(),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      border: Border.all(color: Colors.green)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(AppIcon.iconGoogle.assetPath),
-                      const Gap(16),
-                      Text(
-                        "Login dengan Google?",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ],
-                  ),
-                ),
-              )
+              WidgetLoginButton(
+                variant: LoginButtonVariant.google,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: const HomeScreen(),
+                          type: PageTransitionType.leftToRight));
+                },
+              ),
+              WidgetLoginButton(
+                variant: LoginButtonVariant.apple,
+                onTap: () {},
+              ),
             ],
           ),
         ));
+  }
+}
+
+class WidgetLoginButton extends StatelessWidget {
+  final LoginButtonVariant variant;
+  final Function()? onTap;
+  const WidgetLoginButton({super.key, required this.variant, this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+              color: variant.bgColor,
+              borderRadius: BorderRadius.circular(100),
+              border: Border.all(color: variant.borderColor)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(variant.iconPath),
+              const Gap(16),
+              Text(
+                variant.title,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(color: variant.textColor),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -71,10 +103,20 @@ enum LoginButtonVariant {
   String get title {
     switch (this) {
       case apple:
-        return "Login dengan Google";
+        return "Login dengan Apple";
 
       default:
-        return "Login dengan Apple";
+        return "Login dengan Google";
+    }
+  }
+
+  String get iconPath {
+    switch (this) {
+      case apple:
+        return AppIcon.iconApple.assetPath;
+
+      default:
+        return AppIcon.iconGoogle.assetPath;
     }
   }
 
@@ -84,6 +126,25 @@ enum LoginButtonVariant {
         return AppColors.blackButton;
       default:
         return Colors.white;
+    }
+  }
+
+  Color get textColor {
+    switch (this) {
+      case apple:
+        return AppColors.offWhite;
+
+      default:
+        return AppColors.title;
+    }
+  }
+
+  Color get borderColor {
+    switch (this) {
+      case apple:
+        return AppColors.blackButton;
+      default:
+        return AppColors.greenSuccess;
     }
   }
 }
