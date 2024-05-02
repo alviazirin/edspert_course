@@ -1,8 +1,12 @@
+import 'package:edspert_course/bloc/banner/banner_bloc.dart';
 import 'package:edspert_course/bloc/course/course_bloc.dart';
 import 'package:edspert_course/core/appcolors.dart';
+import 'package:edspert_course/models/banner_response_model.dart';
 import 'package:edspert_course/repos/course_repository.dart';
+import 'package:edspert_course/widgets/image_network_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 import '../models/course_response_model.dart';
 
@@ -81,14 +85,33 @@ class HomeScreen extends StatelessWidget {
                           ],
                         ),
                         if (state is CourseLoadSuccess)
-                          SizedBox(
-                            height: 200,
-                            child: ListView(),
-                          )
+                          _buildCourseList(state.courseList)
                         else
                           const Center(
                             child: CircularProgressIndicator(),
-                          )
+                          ),
+                        const Gap(8),
+                        BlocBuilder<BannerBloc, BannerState>(
+                          builder: (context, state) {
+                            return Column(
+                              children: [
+                                const Text(
+                                  "Terbaru",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16),
+                                ),
+                                const Gap(8),
+                                if (state is BannerLoadSuccess)
+                                  _buildBannerList(state.listBanner)
+                                else
+                                  const Center(
+                                    child: CircularProgressIndicator(),
+                                  )
+                              ],
+                            );
+                          },
+                        )
                       ],
                     );
                   },
@@ -97,6 +120,30 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ));
+  }
+
+  SizedBox _buildBannerList(List<BannerItem> bannerList) {
+    return SizedBox(
+      height: 146,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          // List bannerList = state.listBanner;
+          final banner = bannerList[index];
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: ImageNetworkWidget(
+              imageUrl: banner.eventImage ?? '',
+              height: 146,
+              width: 284,
+            ),
+          );
+        },
+        separatorBuilder: (context, index) => const SizedBox(width: 8),
+        itemCount: bannerList.length,
+      ),
+    );
   }
 
   Widget _buildCourseList(List<CourseItem> listData) {

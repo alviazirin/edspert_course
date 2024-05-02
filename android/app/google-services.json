@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "27163669595",
+    "project_id": "edspert-course-8535d",
+    "storage_bucket": "edspert-course-8535d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27163669595:android:adf3d95f0f0ddf552dbb7e",
+        "android_client_info": {
+          "package_name": "com.alviazirin.edspert_course"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXxUJU25Q_zq7mxqk7KrHHY68xtr2khuY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
