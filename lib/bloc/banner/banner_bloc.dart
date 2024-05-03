@@ -9,7 +9,7 @@ part 'banner_state.dart';
 class BannerBloc extends Bloc<BannerEvent, BannerState> {
   final BannerRepository bannerRepository;
 
-  BannerBloc(this.bannerRepository) : super(BannerInitial()) {
+  BannerBloc({required this.bannerRepository}) : super(BannerInitial()) {
     on<BannerEvent>((event, emit) async {
       if (event is GetBannerEvent) {
         emit(BannerLoading());

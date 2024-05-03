@@ -1,12 +1,17 @@
 import 'package:edspert_course/bloc/banner/banner_bloc.dart';
 import 'package:edspert_course/bloc/course/course_bloc.dart';
+import 'package:edspert_course/bloc/exercise/exercise_bloc.dart';
 import 'package:edspert_course/core/appcolors.dart';
 import 'package:edspert_course/models/banner_response_model.dart';
+import 'package:edspert_course/repos/banner_repository.dart';
 import 'package:edspert_course/repos/course_repository.dart';
+import 'package:edspert_course/repos/exercise_repository.dart';
+import 'package:edspert_course/screens/exercise_list_screen.dart';
 import 'package:edspert_course/widgets/image_network_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../models/course_response_model.dart';
 
@@ -20,7 +25,15 @@ class HomeScreen extends StatelessWidget {
           BlocProvider(
               create: (context) =>
                   CourseBloc(courseRepository: CourseRepository())
-                    ..add(GetCourseEvent()))
+                    ..add(GetCourseEvent())),
+          BlocProvider(
+              create: (context) =>
+                  BannerBloc(bannerRepository: BannerRepository())
+                    ..add(GetBannerEvent())),
+          BlocProvider(
+              create: (context) =>
+                  ExerciseBloc(exerciseRepository: ExerciseRepository())
+                    ..add(GetExerciseEvent())),
         ],
         child: Scaffold(
           appBar: AppBar(
@@ -154,60 +167,69 @@ class HomeScreen extends StatelessWidget {
             itemCount: courseCount,
             itemBuilder: (context, index) {
               CourseItem course = listData[index];
-              return SizedBox(
-                  height: 96,
-                  child: Card(
-                      color: Colors.white,
-                      elevation: 0,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 53,
-                              height: 53,
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: AppColors.inputBackground,
-                              ),
-                              child: Image.network(
-                                course.urlCover ?? '',
-                                errorBuilder: (context, error, stackTrace) =>
-                                    Container(
-                                  height: 100,
-                                  width: 100,
-                                  color: Colors.grey,
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: const ExerciseListScreen(),
+                          type: PageTransitionType.leftToRight));
+                },
+                child: SizedBox(
+                    height: 96,
+                    child: Card(
+                        color: Colors.white,
+                        elevation: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 53,
+                                height: 53,
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: AppColors.inputBackground,
+                                ),
+                                child: Image.network(
+                                  course.urlCover ?? '',
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Container(
+                                    height: 100,
+                                    width: 100,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    course.courseName ?? 'No Course Name',
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w700,
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      course.courseName ?? 'No Course Name',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    '${course.jumlahDone}/${course.jumlahMateri}',
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        color: AppColors.label),
-                                  ),
-                                  const SizedBox(height: 11),
-                                  const LinearProgressIndicator(
-                                    value: 0.5,
-                                  ),
-                                ],
+                                    Text(
+                                      '${course.jumlahDone}/${course.jumlahMateri}',
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.label),
+                                    ),
+                                    const SizedBox(height: 11),
+                                    const LinearProgressIndicator(
+                                      value: 0.5,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      )));
+                            ],
+                          ),
+                        ))),
+              );
             },
           );
   }
