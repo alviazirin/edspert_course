@@ -2,13 +2,14 @@ import 'package:bloc/bloc.dart';
 import 'package:edspert_course/repos/course_repository.dart';
 import 'package:meta/meta.dart';
 
+import '../../domain/repositories/domain_repositories.dart';
 import '../../models/course_response_model.dart';
 
 part 'course_event.dart';
 part 'course_state.dart';
 
 class CourseBloc extends Bloc<CourseEvent, CourseState> {
-  final CourseRepository courseRepository;
+  final CourseRepo courseRepository;
   CourseBloc({required this.courseRepository}) : super(CourseInitial()) {
     on<CourseEvent>((event, emit) async {
       if (event is GetCourseEvent) {

@@ -2,6 +2,9 @@ import 'package:edspert_course/bloc/banner/banner_bloc.dart';
 import 'package:edspert_course/bloc/course/course_bloc.dart';
 import 'package:edspert_course/bloc/exercise/exercise_bloc.dart';
 import 'package:edspert_course/core/appcolors.dart';
+import 'package:edspert_course/data/data_sources/banner_data_source.dart';
+import 'package:edspert_course/data/repositories/banner_repository_impl.dart';
+import 'package:edspert_course/domain/usecases/get_bannerlist_usecase.dart';
 import 'package:edspert_course/models/banner_response_model.dart';
 import 'package:edspert_course/repos/banner_repository.dart';
 import 'package:edspert_course/repos/course_repository.dart';
@@ -23,13 +26,13 @@ class HomeScreen extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (context) =>
-                  CourseBloc(courseRepository: CourseRepository())
-                    ..add(GetCourseEvent())),
+              create: (context) => CourseBloc(courseRepository: CourseRepo())
+                ..add(GetCourseEvent())),
           BlocProvider(
-              create: (context) =>
-                  BannerBloc(bannerRepository: BannerRepository())
-                    ..add(GetBannerEvent())),
+              create: (context) => BannerBloc(
+                  getBannerListUsecase: GetBannerListUseCase(
+                      BannerRepositoryImpl(BannerDataSource())))
+                ..add(GetBannerEvent())),
           BlocProvider(
               create: (context) =>
                   ExerciseBloc(exerciseRepository: ExerciseRepository())

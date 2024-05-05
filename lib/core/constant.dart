@@ -1,3 +1,6 @@
+import 'dart:developer' as dev;
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 const colorPrimary = Color(0xFF357AD4);
@@ -12,3 +15,9 @@ const colorBackground = Color(0xFFF9F9F9);
 const colorOffWhite = Color(0xFFFCFCFC);
 
 Size sizeMedia(BuildContext context) => MediaQuery.sizeOf(context);
+
+logThis(String message, {String? name, StackTrace? stackTrace}) {
+  if (kDebugMode) {
+    dev.log(message, name: name ?? "", stackTrace: stackTrace);
+  }
+}
