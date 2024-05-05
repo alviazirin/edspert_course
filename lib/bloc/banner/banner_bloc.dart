@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:edspert_course/core/core.dart';
 import 'package:edspert_course/domain/usecases/get_bannerlist_usecase.dart';
 import 'package:edspert_course/models/banner_response_model.dart';
-import 'package:edspert_course/repos/banner_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'banner_event.dart';
@@ -21,7 +21,7 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
         }
         emit(BannerLoadSuccess(listBanner: result));
       } else if (event is GetLatestBannerEvent) {
-        print('GetLatestBannerEvent');
+        logThis('GetLatestBannerEvent');
       }
     });
   }

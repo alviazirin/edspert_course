@@ -1,5 +1,5 @@
 import 'package:edspert_course/core/appcolors.dart';
-import 'package:edspert_course/common/presentation/splash.dart';
+import 'package:edspert_course/screens/splash.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppColors.appThemeData,
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }

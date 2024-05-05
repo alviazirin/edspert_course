@@ -6,7 +6,6 @@ import 'package:edspert_course/data/data_sources/banner_data_source.dart';
 import 'package:edspert_course/data/repositories/banner_repository_impl.dart';
 import 'package:edspert_course/domain/usecases/get_bannerlist_usecase.dart';
 import 'package:edspert_course/models/banner_response_model.dart';
-import 'package:edspert_course/repos/banner_repository.dart';
 import 'package:edspert_course/repos/course_repository.dart';
 import 'package:edspert_course/repos/exercise_repository.dart';
 import 'package:edspert_course/screens/exercise_list_screen.dart';
