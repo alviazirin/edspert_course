@@ -1,6 +1,6 @@
 abstract class AuthRepository {
+  Future<bool> registeredUsecase();
   Future<bool> isRegisteredUseCase(String email);
-  Future<bool> isSignedInWithGoogle();
-  bool registeredUsecase();
+  bool isSignedInWithGoogle();
   Future<String?> signInWithGoogleUseCase();
 }

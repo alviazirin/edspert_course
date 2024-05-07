@@ -5,7 +5,7 @@ class IsSignedInWithGoogle {
 
   IsSignedInWithGoogle(this.authRepository);
 
-  Future call() {
+  bool call() {
     return authRepository.isSignedInWithGoogle();
   }
 }
