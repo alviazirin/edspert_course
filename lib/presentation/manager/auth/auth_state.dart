@@ -3,6 +3,8 @@ part of 'auth_bloc.dart';
 @immutable
 sealed class AuthState {}
 
+final class AuthInitialState extends AuthState {}
+
 final class IsSignInWithGoogleLoading extends AuthState {}
 
 final class IsSignInWithGoogleSuccess extends AuthState {}

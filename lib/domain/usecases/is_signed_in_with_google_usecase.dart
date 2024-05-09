@@ -1,9 +1,9 @@
 import 'package:edspert_course/domain/repositories/auth_repository.dart';
 
-class IsSignedInWithGoogle {
+class IsSignedInWithGoogleUsecase {
   final AuthRepository authRepository;
 
-  IsSignedInWithGoogle(this.authRepository);
+  IsSignedInWithGoogleUsecase(this.authRepository);
 
   bool call() {
     return authRepository.isSignedInWithGoogle();

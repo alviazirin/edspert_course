@@ -2,20 +2,22 @@ import 'package:edspert_course/core/appcolors.dart';
 import 'package:edspert_course/screens/splash.dart';
 import 'package:flutter/material.dart';
 
+import 'presentation/app.dart';
+
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: AppColors.appThemeData,
-      home: const SplashScreen(),
-    );
-  }
-}
+//   // This widget is the root of your application.
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Flutter Demo',
+//       theme: AppColors.appThemeData,
+//       home: const SplashScreen(),
+//     );
+//   }
+// }
