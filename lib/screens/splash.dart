@@ -1,7 +1,10 @@
+import 'package:edspert_course/bloc/auth/auth_bloc.dart';
 import 'package:edspert_course/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
+
+import 'home_nav_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -35,7 +38,25 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     animationSize = Tween(begin: 1, end: 2);
     return BlocListener(
-      listener: listener,
+      listener: (context, state) {
+        if (state is SignInGoogleSuccess) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomeNavScreen(),
+            ),
+          );
+        }
+
+        if (state is SignInGoogleError) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LoginScreen(),
+            ),
+          );
+        }
+      },
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         body: Padding(
