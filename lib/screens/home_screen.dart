@@ -1,6 +1,3 @@
-import 'package:edspert_course/bloc/banner/banner_bloc.dart';
-import 'package:edspert_course/bloc/course/course_bloc.dart';
-import 'package:edspert_course/bloc/exercise/exercise_bloc.dart';
 import 'package:edspert_course/core/appcolors.dart';
 import 'package:edspert_course/data/data_sources/banner_data_source.dart';
 import 'package:edspert_course/data/repositories/banner_repository_impl.dart';
@@ -16,6 +13,9 @@ import 'package:gap/gap.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../models/course_response_model.dart';
+import '../presentation/manager/banner/banner_bloc.dart';
+import '../presentation/manager/course/course_bloc.dart';
+import '../presentation/manager/exercise/exercise_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:edspert_course/repos/course_repository.dart';
 import 'package:meta/meta.dart';
 
-import '../../models/course_response_model.dart';
+import '../../../models/models.dart';
 
 part 'course_event.dart';
 part 'course_state.dart';

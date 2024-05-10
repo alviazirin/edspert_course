@@ -1,9 +1,9 @@
-import 'package:edspert_course/bloc/auth/auth_bloc.dart';
 import 'package:edspert_course/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 
+import '../presentation/manager/auth/auth_bloc.dart';
 import 'home_nav_screen.dart';
 
 class SplashScreen extends StatefulWidget {
