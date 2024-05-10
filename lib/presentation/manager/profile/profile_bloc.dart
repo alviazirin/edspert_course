@@ -1,4 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/physics.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 
 part 'profile_event.dart';

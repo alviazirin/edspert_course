@@ -1,6 +1,7 @@
-import 'package:edspert_course/bloc/exercise/exercise_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../presentation/manager/exercise/exercise_bloc.dart';
 
 class ExerciseListScreen extends StatelessWidget {
   const ExerciseListScreen({super.key});
