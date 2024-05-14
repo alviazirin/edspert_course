@@ -1,3 +1,6 @@
+import 'package:edspert_course/core/appcolors.dart';
+import 'package:edspert_course/core/constant.dart';
+import 'package:edspert_course/domain/usecases/sign_in_with_google_usecase.dart';
 import 'package:edspert_course/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +20,7 @@ class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Tween<double> animationSize;
+  late Size size;
 
   @override
   void initState() {
@@ -25,7 +29,15 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
       duration: const Duration(seconds: 1),
     );
-    Future.microtask(() {});
+    Future.microtask(() {
+      context.read<AuthBloc>().add(IsSignInWithGoogleEvent());
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    size = sizeMedia(context);
   }
 
   @override
@@ -36,10 +48,12 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    animationSize = Tween(begin: 1, end: 2);
-    return BlocListener(
+    return BlocListener<AuthBloc, AuthState>(
+      listenWhen: (AuthState prevState, AuthState nextState) =>
+          prevState is SignInGoogleLoading &&
+          (nextState is SignInGoogleSuccess || nextState is SignInGoogleError),
       listener: (context, state) {
-        if (state is SignInGoogleSuccess) {
+        if (state is SignInWithGoogleUseCase) {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -58,36 +72,72 @@ class _SplashScreenState extends State<SplashScreen>
         }
       },
       child: Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Center(
-            child: TweenAnimationBuilder<double>(
-              duration: const Duration(seconds: 2),
-              tween: animationSize,
-              builder: (context, value, child) {
-                return Center(
-                  child: Transform.scale(
-                    scale: value,
-                    child: Image.asset(
-                      "assets/images/edspert_logo.png",
-                      width: 160,
-                    ),
-                  ),
-                );
-              },
-              onEnd: () {
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    PageTransition(
-                        child: const LoginScreen(),
-                        type: PageTransitionType.leftToRight),
-                    (route) => false);
-              },
-            ),
+        backgroundColor: AppColors.primary,
+        body: Center(
+          child: Image.asset(
+            'assets/images/edspert_logo.png',
+            width: size.width * 0.5,
+            fit: BoxFit.cover,
           ),
         ),
       ),
     );
   }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   animationSize = Tween(begin: 1, end: 2);
+  //   return BlocListener<AuthBloc, AuthState>(
+  //     listener: (context, state) {
+  //       if (state is SignInGoogleSuccess) {
+  //         Navigator.pushReplacement(
+  //           context,
+  //           MaterialPageRoute(
+  //             builder: (context) => const HomeNavScreen(),
+  //           ),
+  //         );
+  //       }
+
+  //       if (state is SignInGoogleError) {
+  //         Navigator.pushReplacement(
+  //           context,
+  //           MaterialPageRoute(
+  //             builder: (context) => const LoginScreen(),
+  //           ),
+  //         );
+  //       }
+  //     },
+  //     child: Scaffold(
+  //       backgroundColor: Theme.of(context).primaryColor,
+  //       body: Padding(
+  //         padding: const EdgeInsets.symmetric(horizontal: 16.0),
+  //         child: Center(
+  //           child: TweenAnimationBuilder<double>(
+  //             duration: const Duration(seconds: 2),
+  //             tween: animationSize,
+  //             builder: (context, value, child) {
+  //               return Center(
+  //                 child: Transform.scale(
+  //                   scale: value,
+  //                   child: Image.asset(
+  //                     "assets/images/edspert_logo.png",
+  //                     width: 160,
+  //                   ),
+  //                 ),
+  //               );
+  //             },
+  //             onEnd: () {
+  //               Navigator.pushAndRemoveUntil(
+  //                   context,
+  //                   PageTransition(
+  //                       child: const LoginScreen(),
+  //                       type: PageTransitionType.leftToRight),
+  //                   (route) => false);
+  //             },
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }

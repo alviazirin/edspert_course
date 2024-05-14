@@ -5,6 +5,7 @@ import 'package:edspert_course/domain/usecases/upload_image_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../data/data_sources/auth_data_source.dart';
 import '../data/repositories/profile_repository_impl.dart';
 import '../domain/repositories/domain_repositories.dart';
 import '../screens/splash.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) {
-            // AuthDataSource authDataSource = AuthDataSource();
+            AuthDataSource authDataSource = AuthDataSource();
             AuthRepository authRepository = AuthRepositoryImple();
             return AuthBloc(
               IsSignedInWithGoogleUsecase(authRepository),
