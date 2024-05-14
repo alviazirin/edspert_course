@@ -13,6 +13,10 @@ final class IsSignInWithGoogleError extends AuthState {}
 
 final class SignInGoogleLoading extends AuthState {}
 
-final class SignInGoogleSuccess extends AuthState {}
+final class SignInGoogleSuccess extends AuthState {
+  final String email;
+
+  SignInGoogleSuccess(this.email);
+}
 
 final class SignInGoogleError extends AuthState {}

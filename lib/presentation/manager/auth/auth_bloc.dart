@@ -18,9 +18,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         bool isSignedIn = isSignedInWithGoogle();
         await Future.delayed(const Duration(seconds: 3));
         if (isSignedIn) {
-          emit(SignInGoogleSuccess());
+          emit(IsSignInWithGoogleSuccess());
           return;
         }
+        emit(SignInGoogleError());
+      }
+      if (event is SignInWithGoogleEvent) {
+        emit(SignInGoogleLoading());
+
+        String? email = await signInWithGoogleUseCase();
+        if (email != null) {
+          emit(SignInGoogleSuccess(email));
+        }
+
         emit(SignInGoogleError());
       }
     });
