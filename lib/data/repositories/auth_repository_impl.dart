@@ -1,14 +1,14 @@
 import 'dart:developer';
 
+import 'package:edspert_course/data/data_sources/auth_data_source.dart';
 import 'package:edspert_course/domain/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthRepositoryImple implements AuthRepository {
   @override
-  Future<bool> isRegisteredUseCase(String email) {
-    // TODO: implement isRegisteredUseCase
-    throw UnimplementedError();
+  Future<bool> isRegisteredUseCase(String email) async {
+    return await AuthDataSource().checkIfUserRegistered(email);
   }
 
   @override

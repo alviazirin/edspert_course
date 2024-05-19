@@ -12,4 +12,6 @@ class AuthDataSource {
       return false;
     }
   }
+
+  Future registerUser()
 }
