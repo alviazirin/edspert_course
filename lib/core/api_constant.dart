@@ -6,4 +6,5 @@ class ApiContants {
   static String coursePath = 'exercise/data_course';
   static String bannerPath = 'event/list';
   static String exercisePath = 'exercise/data_exercise';
+  String user(String email) => "users?email=$email";
 }

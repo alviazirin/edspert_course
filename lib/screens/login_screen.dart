@@ -1,7 +1,9 @@
 import 'package:edspert_course/core/appcolors.dart';
 import 'package:edspert_course/core/appicon.dart';
+import 'package:edspert_course/presentation/manager/auth/auth_bloc.dart';
 import 'package:edspert_course/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -39,16 +41,51 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const Spacer(),
-              WidgetLoginButton(
-                variant: LoginButtonVariant.google,
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      PageTransition(
-                          child: const HomeScreen(),
-                          type: PageTransitionType.leftToRight));
+              BlocConsumer<AuthBloc, AuthState>(
+                listenWhen: (previous, current) {
+                  return previous is SignInGoogleLoading &&
+                      (current is SignInGoogleError ||
+                          current is SignInGoogleSuccess);
+                },
+                listener: (context, state) {
+                  if (state is SignInGoogleSuccess) {
+                    //logic check is register
+                  }
+                },
+                buildWhen: (previous, current) {
+                  return previous is SignInGoogleLoading &&
+                      (current is SignInGoogleSuccess ||
+                          current is SignInGoogleError);
+                },
+                builder: (context, state) {
+                  if (state is SignInGoogleLoading) {
+                    return const CircularProgressIndicator();
+                  }
+
+                  return WidgetLoginButton(
+                    variant: LoginButtonVariant.google,
+                    onTap: () {
+                      context.read<AuthBloc>().add(SignInWithGoogleEvent());
+
+                      // Navigator.push(
+                      //     context,
+                      //     PageTransition(
+                      //         child: const HomeScreen(),
+                      //         type: PageTransitionType.leftToRight));
+                    },
+                  );
                 },
               ),
+              // WidgetLoginButton(
+              //   variant: LoginButtonVariant.google,
+              //   onTap: () {
+              //     Navigator.push(
+              //         context,
+              //         PageTransition(
+              //             child: const HomeScreen(),
+              //             type: PageTransitionType.leftToRight));
+              //   },
+              // ),
               WidgetLoginButton(
                 variant: LoginButtonVariant.apple,
                 onTap: () {},
