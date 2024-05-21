@@ -34,6 +34,7 @@ class AuthRepositoryImple implements AuthRepository {
       return userCredentialResult.user?.email;
     } catch (e) {
       log('$e', name: "errorSignInGoogle");
+      return null;
     }
   }
 
@@ -45,5 +46,10 @@ class AuthRepositoryImple implements AuthRepository {
   @override
   Future<bool> registeredUsecase(Map<String, dynamic> dataUser) async {
     return await AuthDataSource().registerUser(dataUser);
+  }
+
+  @override
+  User? getDataUser() {
+    return FirebaseAuth.instance.currentUser;
   }
 }

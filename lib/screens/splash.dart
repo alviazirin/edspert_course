@@ -2,6 +2,7 @@ import 'package:edspert_course/core/appcolors.dart';
 import 'package:edspert_course/core/constant.dart';
 import 'package:edspert_course/domain/usecases/sign_in_with_google_usecase.dart';
 import 'package:edspert_course/screens/login_screen.dart';
+import 'package:edspert_course/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
@@ -51,8 +52,19 @@ class _SplashScreenState extends State<SplashScreen>
     return BlocListener<AuthBloc, AuthState>(
       listenWhen: (AuthState prevState, AuthState nextState) =>
           prevState is SignInGoogleLoading &&
-          (nextState is SignInGoogleSuccess || nextState is SignInGoogleError),
+          (nextState is SignInGoogleSuccess ||
+              nextState is SignInGoogleError ||
+              nextState is RegisterGoogle),
       listener: (context, state) {
+        if (state is RegisterGoogle) {
+          Navigator.pushAndRemoveUntil(
+              context,
+              PageTransition(
+                  child: const RegisterScreen(),
+                  type: PageTransitionType.leftToRight),
+              (route) => false);
+        }
+
         if (state is SignInWithGoogleUseCase) {
           Navigator.pushReplacement(
             context,

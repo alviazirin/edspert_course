@@ -43,65 +43,91 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
       body: Form(
         key: _formRegisKey,
-        child: ListView(
-          children: [
-            const Gap(16),
-            TextFormField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                  label: Text(
-                "Email",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-              )),
-            ),
-            const Gap(16),
-            TextFormField(
-              controller: _nameController,
-              decoration: const InputDecoration(
-                  label: Text(
-                "Nama Lengkap",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-              )),
-            ),
-            Text(
-              "Jenis Kelamin",
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: ListView(
+            children: [
+              const Gap(16),
+              TextFormField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                    label: Text(
+                  "Email",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                )),
+              ),
+              const Gap(16),
+              TextFormField(
+                controller: _nameController,
+                decoration: const InputDecoration(
+                    label: Text(
+                  "Nama Lengkap",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                )),
+              ),
+              Text(
+                "Jenis Kelamin",
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _buildButtonGender(
+                    context,
+                    title: "Laki-Laki",
+                    onTap: () {},
+                  ),
+                  _buildButtonGender(
+                    context,
+                    title: "Perempuan",
+                    onTap: () {},
+                  ),
+                ],
+              ),
+              const Gap(16),
+              Text(
+                "Kelas",
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              DropdownButtonFormField(
+                  items: kelas
+                      .map((e) => DropdownMenuItem(
+                          value: e,
+                          child: Text(
+                            "$e",
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          )))
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      selectedKelas = value!;
+                    });
+                  }),
+              const Gap(16),
+              TextFormField(
+                controller: _sekolahController,
+                decoration: const InputDecoration(
+                    label: Text(
+                  "Nama Sekolah",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                )),
+              ),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Container(
+          height: 60,
+          decoration:
+              customBoxDecoration(context: context, borderCircularSize: 25),
+          child: Center(
+            child: Text(
+              "DAFTAR",
               style: Theme.of(context).textTheme.bodyLarge,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildButtonGender(
-                  context,
-                  title: "Laki-Laki",
-                  onTap: () {},
-                ),
-                _buildButtonGender(
-                  context,
-                  title: "Perempuan",
-                  onTap: () {},
-                ),
-              ],
-            ),
-            const Gap(16),
-            Text(
-              "Kelas",
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            DropdownButtonFormField(
-                items: kelas
-                    .map((e) => DropdownMenuItem(
-                            child: Text(
-                          "$e",
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        )))
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    selectedKelas = value;
-                  });
-                }),
-            const Gap(16),
-          ],
+          ),
         ),
       ),
     );

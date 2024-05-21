@@ -1,5 +1,6 @@
 import 'dart:developer' as dev;
 
+import 'package:edspert_course/core/appcolors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -20,4 +21,19 @@ logThis(String message, {String? name, StackTrace? stackTrace}) {
   if (kDebugMode) {
     dev.log(message, name: name ?? "", stackTrace: stackTrace);
   }
+}
+
+customBoxDecoration({
+  required BuildContext context,
+  Color? color,
+  double? borderCircularSize,
+  BoxBorder? border,
+  DecorationImage? backgroundImage,
+}) {
+  return BoxDecoration(
+    color: color ?? AppColors.primary,
+    borderRadius: BorderRadius.circular(borderCircularSize ?? 8),
+    border: border,
+    image: backgroundImage,
+  );
 }

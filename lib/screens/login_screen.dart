@@ -46,7 +46,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 listenWhen: (previous, current) {
                   return previous is SignInGoogleLoading &&
                       (current is SignInGoogleError ||
-                          current is SignInGoogleSuccess);
+                          current is SignInGoogleSuccess ||
+                          current is RegisterGoogle);
                 },
                 listener: (context, state) {
                   if (state is RegisterGoogle) {

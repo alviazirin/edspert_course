@@ -63,6 +63,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '27163669595',
     projectId: 'edspert-course-8535d',
     storageBucket: 'edspert-course-8535d.appspot.com',
+    androidClientId: '27163669595-hg1j15g2o4unh8j1kvvjr640h2hsdd9r.apps.googleusercontent.com',
+    iosClientId: '27163669595-hp7jih2pv0s0a6gncfece41fnomlcd15.apps.googleusercontent.com',
     iosBundleId: 'com.alviazirin.edspertCourse',
   );
+
 }
