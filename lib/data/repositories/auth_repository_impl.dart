@@ -12,12 +12,6 @@ class AuthRepositoryImple implements AuthRepository {
   }
 
   @override
-  Future<bool> registeredUsecase() {
-    // TODO: implement registeredUsecase
-    throw UnimplementedError();
-  }
-
-  @override
   Future<String?> signInWithGoogleUseCase() async {
     try {
       //trigger authentication flow
@@ -46,5 +40,10 @@ class AuthRepositoryImple implements AuthRepository {
   @override
   bool isSignedInWithGoogle() {
     return FirebaseAuth.instance.currentUser != null;
+  }
+
+  @override
+  Future<bool> registeredUsecase(Map<String, dynamic> dataUser) async {
+    return await AuthDataSource().registerUser(dataUser);
   }
 }

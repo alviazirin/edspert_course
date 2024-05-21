@@ -19,4 +19,6 @@ final class SignInGoogleSuccess extends AuthState {
   SignInGoogleSuccess(this.email);
 }
 
+final class RegisterGoogle extends AuthState {}
+
 final class SignInGoogleError extends AuthState {}

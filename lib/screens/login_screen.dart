@@ -2,6 +2,7 @@ import 'package:edspert_course/core/appcolors.dart';
 import 'package:edspert_course/core/appicon.dart';
 import 'package:edspert_course/presentation/manager/auth/auth_bloc.dart';
 import 'package:edspert_course/screens/home_screen.dart';
+import 'package:edspert_course/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -48,8 +49,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           current is SignInGoogleSuccess);
                 },
                 listener: (context, state) {
-                  if (state is SignInGoogleSuccess) {
-                    //logic check is register
+                  if (state is RegisterGoogle) {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            child: const RegisterScreen(),
+                            type: PageTransitionType.leftToRight));
                   }
                 },
                 buildWhen: (previous, current) {

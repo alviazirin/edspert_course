@@ -1,4 +1,5 @@
 import 'package:edspert_course/data/repositories/auth_repository_impl.dart';
+import 'package:edspert_course/domain/usecases/is_registered_usecase.dart';
 import 'package:edspert_course/domain/usecases/is_signed_in_with_google_usecase.dart';
 import 'package:edspert_course/domain/usecases/sign_in_with_google_usecase.dart';
 import 'package:edspert_course/domain/usecases/upload_image_usecase.dart';

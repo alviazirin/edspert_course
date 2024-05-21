@@ -35,7 +35,11 @@ class DioService {
     return _dio.get(url, queryParameters: params);
   }
 
-  Future<Response> post(String url, {Map<String, dynamic>? data}) async {
+  Future<Response> postRaw(String url, {Map<String, dynamic>? data}) async {
+    return _dio.post(url, data: data);
+  }
+
+  Future<Response> postFormData(String url, {FormData? data}) async {
     return _dio.post(url, data: data);
   }
 
