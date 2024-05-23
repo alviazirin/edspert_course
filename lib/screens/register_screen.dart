@@ -179,8 +179,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   "kelas": selectedKelas,
                   "gender": selectedGender,
                   "foto": "",
-                  "jenjang": ""
+                  "jenjang": getSchoolLevel(selectedKelas)
                 };
+                logThis("$dataUser", name: "dataUserRegis");
                 context.read<AuthBloc>().add(RegisterWithGoogleEvent(dataUser));
               },
               child: Card(
@@ -206,6 +207,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+  String getSchoolLevel(int selection) {
+    if (selection >= 1 && selection <= 6) {
+      return "SD";
+    } else if (selection >= 7 && selection <= 9) {
+      return "SMP";
+    } else {
+      return "SMA";
+    }
+  }
+
   InkWell _buildButtonGender(BuildContext context,
       {required String title, Function()? onTap}) {
     return InkWell(
@@ -214,6 +225,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         elevation: 1,
         child: Container(
+          height: 60,
+          width: size.width * 0.4,
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
               color: AppColors.primary,
@@ -221,7 +234,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Center(
             child: Text(
               title,
-              style: Theme.of(context).textTheme.labelMedium,
+              style: Theme.of(context).textTheme.labelLarge,
             ),
           ),
         ),
