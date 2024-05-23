@@ -2,7 +2,9 @@ import 'package:bloc/bloc.dart';
 import 'package:edspert_course/data/repositories/auth_repository_impl.dart';
 import 'package:edspert_course/domain/usecases/is_registered_usecase.dart';
 import 'package:edspert_course/domain/usecases/is_signed_in_with_google_usecase.dart';
+import 'package:edspert_course/domain/usecases/register_usecase.dart';
 import 'package:edspert_course/domain/usecases/sign_in_with_google_usecase.dart';
+import 'package:edspert_course/models/user_by_email_response_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
@@ -53,6 +55,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         }
 
         emit(SignInGoogleError());
+      }
+
+      if (event is RegisterWithGoogleEvent) {
+        emit(RegisterGoogleLoading());
+        UserByEmailResponse? user =
+            await AuthRepositoryImple().registeredUsecase(event.dataUser);
+        if (user == null) {
+          emit(RegisterGoogleError());
+        }
+        emit(RegisterGoogleSuccess());
       }
     });
   }

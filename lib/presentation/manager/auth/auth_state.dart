@@ -21,4 +21,10 @@ final class SignInGoogleSuccess extends AuthState {
 
 final class RegisterGoogle extends AuthState {}
 
+final class RegisterGoogleLoading extends AuthState {}
+
+final class RegisterGoogleSuccess extends AuthState {}
+
+final class RegisterGoogleError extends AuthState {}
+
 final class SignInGoogleError extends AuthState {}

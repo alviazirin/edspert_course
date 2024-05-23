@@ -14,16 +14,17 @@ class AuthDataSource {
     }
   }
 
-  Future registerUser(Map<String, dynamic> dataUser) async {
+  Future<UserByEmailResponse?> registerUser(
+      Map<String, dynamic> dataUser) async {
     try {
       FormData formData = FormData.fromMap(dataUser);
       final response = await DioService()
           .postFormData(ApiContants.userRegister, data: formData);
       final data = UserByEmailResponse.fromJson(response.data);
-      if (data.status == 0) return false;
-      return true;
+      if (data.status == 0) return null;
+      return data;
     } catch (e) {
-      return false;
+      return null;
     }
   }
 }

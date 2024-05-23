@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:edspert_course/data/data_sources/auth_data_source.dart';
 import 'package:edspert_course/domain/repositories/auth_repository.dart';
+import 'package:edspert_course/models/user_by_email_response_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -44,7 +45,7 @@ class AuthRepositoryImple implements AuthRepository {
   }
 
   @override
-  Future<bool> registeredUsecase(Map<String, dynamic> dataUser) async {
+  Future<UserByEmailResponse?> registeredUsecase(Map<String, dynamic> dataUser) async {
     return await AuthDataSource().registerUser(dataUser);
   }
 

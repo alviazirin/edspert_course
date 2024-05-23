@@ -1,4 +1,5 @@
 import 'package:edspert_course/domain/repositories/auth_repository.dart';
+import 'package:edspert_course/models/user_by_email_response_model.dart';
 
 class RegisterUseCase {
   final AuthRepository authRepository;
@@ -6,7 +7,7 @@ class RegisterUseCase {
 
   RegisterUseCase(this.authRepository, this.dataUser);
 
-  Future<bool> call() async {
+  Future<UserByEmailResponse?> call() async {
     return await authRepository.registeredUsecase(dataUser);
   }
 }
